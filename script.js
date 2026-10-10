@@ -1,7 +1,9 @@
 var visor = document.getElementById("visor");
 var btnIgual = document.getElementById("btn-igual");
 var btnLimpar = document.getElementById("btn-limpar");
+var btnInstalar = document.getElementById("btn-instalar");
 var resultadoPronto = false;
+var eventoInstalacao = null;
 
 function digitar(valor) {
   var expressao = visor.textContent;
@@ -78,3 +80,23 @@ document.querySelectorAll(".tecla[data-valor]").forEach(function (tecla) {
 
 btnIgual.addEventListener("click", calcular);
 btnLimpar.addEventListener("click", limpar);
+
+window.addEventListener("beforeinstallprompt", function (evento) {
+  evento.preventDefault();
+  eventoInstalacao = evento;
+  btnInstalar.hidden = false;
+});
+
+btnInstalar.addEventListener("click", async function () {
+  if (!eventoInstalacao) return;
+
+  eventoInstalacao.prompt();
+  await eventoInstalacao.userChoice;
+  eventoInstalacao = null;
+  btnInstalar.hidden = true;
+});
+
+window.addEventListener("appinstalled", function () {
+  eventoInstalacao = null;
+  btnInstalar.hidden = true;
+});

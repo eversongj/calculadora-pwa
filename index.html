@@ -11,6 +11,7 @@
 </head>
 <body>
   <main class="calculadora" aria-label="Calculadora">
+    <button class="instalar" type="button" id="btn-instalar" hidden>Instalar aplicativo</button>
     <div class="visor" id="visor" role="status" aria-live="polite">0</div>
 
     <div class="teclado">
@@ -18,26 +19,21 @@
       <button class="tecla numero" type="button" data-valor="8">8</button>
       <button class="tecla numero" type="button" data-valor="9">9</button>
       <button class="tecla igual" type="button" id="btn-igual" aria-label="Calcular">=</button>
-
       <button class="tecla numero" type="button" data-valor="4">4</button>
       <button class="tecla numero" type="button" data-valor="5">5</button>
       <button class="tecla numero" type="button" data-valor="6">6</button>
-
       <button class="tecla numero" type="button" data-valor="1">1</button>
       <button class="tecla numero" type="button" data-valor="2">2</button>
       <button class="tecla numero" type="button" data-valor="3">3</button>
-
       <button class="tecla numero" type="button" data-valor="0">0</button>
       <button class="tecla numero" type="button" data-valor=".">.</button>
       <button class="tecla limpar" type="button" id="btn-limpar" aria-label="Limpar">C</button>
-
       <button class="tecla op" type="button" data-valor="+">+</button>
-      <button class="tecla op" type="button" data-valor="-">−</button>
-      <button class="tecla op" type="button" data-valor="*">×</button>
-      <button class="tecla op divisao" type="button" data-valor="/">÷</button>
+      <button class="tecla op" type="button" data-valor="-">&minus;</button>
+      <button class="tecla op" type="button" data-valor="*">&times;</button>
+      <button class="tecla op divisao" type="button" data-valor="/">&divide;</button>
     </div>
   </main>
-
   <script src="script.js"></script>
   <script>
     if ("serviceWorker" in navigator) {
