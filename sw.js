@@ -1,4 +1,4 @@
-const CACHE = "calculadora-v1";
+const CACHE = "calculadora-v2";
 
 self.addEventListener("install", function (evento) {
   evento.waitUntil(
@@ -14,6 +14,15 @@ self.addEventListener("install", function (evento) {
       ]);
     })
   );
+  self.skipWaiting();
+});
+
+self.addEventListener("activate", function (evento) {
+  evento.waitUntil(
+    caches.delete("calculadora-v1").then(function () {
+      return self.clients.claim();
+    })
+  );
 });
 
 self.addEventListener("fetch", function (evento) {
@@ -22,7 +31,7 @@ self.addEventListener("fetch", function (evento) {
   }
 
   evento.respondWith(
-    caches.match(evento.request).then(function (resposta) {
+    caches.match(evento.request, { cacheName: CACHE }).then(function (resposta) {
       return resposta || fetch(evento.request);
     })
   );
