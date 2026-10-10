@@ -1,4 +1,4 @@
-const CACHE = "calculadora-v2";
+const CACHE = "calculadora-v3";
 
 self.addEventListener("install", function (evento) {
   evento.waitUntil(
@@ -19,7 +19,13 @@ self.addEventListener("install", function (evento) {
 
 self.addEventListener("activate", function (evento) {
   evento.waitUntil(
-    caches.delete("calculadora-v1").then(function () {
+    caches.keys().then(function (cachesAtuais) {
+      return Promise.all(
+        cachesAtuais
+          .filter(function (nome) { return nome !== CACHE; })
+          .map(function (nome) { return caches.delete(nome); })
+      );
+    }).then(function () {
       return self.clients.claim();
     })
   );
